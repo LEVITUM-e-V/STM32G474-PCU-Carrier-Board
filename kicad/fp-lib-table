@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "PCU_Molex")(type "KiCad")(uri "${KIPRJMOD}/PCU_Molex.pretty")(options "")(descr "Molex Micro-Fit 3.0 right-angle headers with Molex 3D models (project copy)"))
+)

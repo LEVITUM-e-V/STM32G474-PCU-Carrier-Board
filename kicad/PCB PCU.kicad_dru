@@ -1,0 +1,6 @@
+(version 1)
+# Module header GND pin 24 (J4/J5, THT): fill leaves room for only one F.Cu spoke here;
+# the pin is also tied to the L2 GND plane and the bottom pour through the hole.
+(rule "Module header GND pin 24: 1 spoke ok"
+  (condition "A.Pad_Number == '24' && A.NetName == 'GND'")
+  (constraint min_resolved_spokes 1))

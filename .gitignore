@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# KiCad local/session files
+*.kicad_prl
+*.lck
+*-backups/
+_autosave-*
+fp-info-cache
+*.kicad_sch-bak
+*.kicad_pcb-bak
+~*
+
+# Vendor 3D models (Molex STEP files): download them yourself, see REQUIREMENTS.md
+kicad/3d Models/*.stp
+kicad/3d Models/*.step
+kicad/3d Models/*.zip
+kicad/3d Models/*.pdf
+
+# Python
+__pycache__/
