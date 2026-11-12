@@ -87,3 +87,7 @@ These documents were written while the board was developed in a different folder
 - The board has not been built or tested yet.
 - The firmware still targets the previous MCU (STM32U575) and has to be ported to the STM32G474. It is not part of this repository.
 - Unanswered system questions are listed in `docs/PCB_LAYOUT_REMINDERS.md`: whether the PCU is a CAN bus end, what the digital outputs drive, and which Hall sensor type is used.
+
+## Credits and use
+
+This board was designed at Levitum and is Levitum's property. You are welcome to use it as a starting point for your own PCU or STM32G474 carrier board. If it helps you, a shout-out to Levitum is appreciated.
