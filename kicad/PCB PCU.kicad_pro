@@ -755,14 +755,6 @@
       },
       {
         "netclass": "AnalogHZ",
-        "pattern": "Net-(C50-Pad1)"
-      },
-      {
-        "netclass": "AnalogHZ",
-        "pattern": "Net-(C52-Pad1)"
-      },
-      {
-        "netclass": "AnalogHZ",
         "pattern": "Net-(C11-Pad1)"
       },
       {
@@ -854,14 +846,6 @@
         "pattern": "Net-(R87-Pad2)"
       },
       {
-        "netclass": "OpOut",
-        "pattern": "Net-(R93-Pad2)"
-      },
-      {
-        "netclass": "OpOut",
-        "pattern": "Net-(R100-Pad1)"
-      },
-      {
         "netclass": "ADC",
         "pattern": "MCU_ISENSE_?"
       },
@@ -892,6 +876,18 @@
       {
         "netclass": "CAN",
         "pattern": "Net-(C21-Pad1)"
+      },
+      {
+        "netclass": "CAN",
+        "pattern": "CAN2_*"
+      },
+      {
+        "netclass": "CAN",
+        "pattern": "Net-(U15-CAN*)"
+      },
+      {
+        "netclass": "CAN",
+        "pattern": "Net-(C61-Pad1)"
       },
       {
         "netclass": "RS232L",
@@ -1006,8 +1002,40 @@
   },
   "sheets": [
     [
-      "9c7a639b-89ad-46f3-aea3-dca575e21b76",
+      "fecd2fc6-8c29-4d7d-8a2e-50e99fe2a6c0",
       ""
+    ],
+    [
+      "aa04f672-e4b9-4925-8583-6fa35c174b07",
+      "Connectors"
+    ],
+    [
+      "faffff91-5d52-4643-9af3-d76adc669280",
+      "Power-supply"
+    ],
+    [
+      "7155bf2d-fe24-43f8-8e43-248674ea8fed",
+      "Connection To STM"
+    ],
+    [
+      "e0776d4f-32df-4afb-a2b3-30afe6db75b9",
+      "VSENSE"
+    ],
+    [
+      "b23a01e7-fc67-4f24-9f05-88d80ead12f8",
+      "TSENSE"
+    ],
+    [
+      "de7f043d-f236-4029-a387-2460fce5b0fe",
+      "ISENSE"
+    ],
+    [
+      "691119d3-db69-48c4-897d-c416e13e784d",
+      "RS232"
+    ],
+    [
+      "1468d8b5-c19b-48d7-8b20-d8d1078ea0a2",
+      "Digital EinAusgänge"
     ]
   ],
   "text_variables": {}

@@ -15,6 +15,8 @@ mkdir -p "$OUT/gerbers"
 "$KICAD_CLI" pcb export drill -o "$OUT/gerbers/" --format excellon --excellon-units mm \
   --excellon-separate-th --generate-map --map-format gerberx2 "$BOARD"
 "$KICAD_CLI" pcb export pos -o "$OUT/PCB_PCU-pos.csv" --format csv --units mm --side both "$BOARD"
+# JLCPCB column names (Designator, Mid X, Mid Y, Rotation, Layer)
+sed -i.bak '1s/.*/Designator,Val,Package,Mid X,Mid Y,Rotation,Layer/' "$OUT/PCB_PCU-pos.csv" && rm -f "$OUT/PCB_PCU-pos.csv.bak"
 "$KICAD_CLI" sch export pdf -o "$ROOT/docs/PCB_PCU_schematic.pdf" "$ROOT/kicad/PCB PCU.kicad_sch"
 
 (cd "$OUT/gerbers" && zip -q -r ../PCB_PCU-gerbers.zip .)

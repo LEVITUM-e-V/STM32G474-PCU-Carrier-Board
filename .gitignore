@@ -10,6 +10,8 @@ fp-info-cache
 *.kicad_sch-bak
 *.kicad_pcb-bak
 ~*
+# ERC/DRC report files
+*.rpt
 
 # Vendor 3D models (Molex STEP files): download them yourself, see REQUIREMENTS.md
 kicad/3d Models/*.stp
@@ -19,3 +21,10 @@ kicad/3d Models/*.pdf
 
 # Python
 __pycache__/
+
+# KiCad backup folder (also covered by *-backups/ above)
+kicad/PCB PCU-backups/
+
+# Documentation: kept locally only, not uploaded
+# (schematic PDFs, merged board + schematics PDF, design notes, routing plan, reviews)
+docs/

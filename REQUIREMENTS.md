@@ -27,7 +27,7 @@ Both project libraries are in `kicad/` and are found automatically through `sym-
 | Library | File | Contents |
 |---|---|---|
 | Symbols `PCU` | `kicad/PCU.kicad_sym` | MAX3221, TCAN332, 74LVC2G07, the WeAct module halves, the `+3V3_MCU` power symbol |
-| Footprints `PCU_Molex` | `kicad/PCU_Molex.pretty/` | Molex Micro-Fit 3.0 right-angle headers 2×2, 2×4, 2×5 and 2×6 |
+| Footprints `PCU_Molex` | `kicad/PCU_Molex.pretty/` | Molex Micro-Fit 3.0 right-angle headers 2×2, 2×3, 2×4, 2×5 and 2×6 |
 
 **3D models (optional):** the Molex STEP files are not in the repository. To see the connectors in the 3D view, download them as described in `kicad/3d Models/README.md`.
 
@@ -62,18 +62,19 @@ Design rules that the board is checked against are stored in `kicad/PCB PCU.kica
 | Item | Value |
 |---|---|
 | Files | `bom/BOM_PCU_G474.csv` and `production/PCB_PCU-pos.csv` |
-| Assembled parts | 213 parts in 37 BOM lines |
+| Assembled parts | 206 parts in 39 BOM lines (plus one DNP line, R105/R106) |
 | Sides | Top side only. The bottom side has only bare test pads |
 | Smallest passive | 0603 |
 | Finest pitch | 0.65 mm (SSOP-16) |
-| Through-hole parts | 6 Micro-Fit connectors: J1, J2, J3, J8, J9, J10 |
+| Through-hole parts | 9 Micro-Fit connectors: J1, J2, J3, J8, J9, J10, J11, J12, J13 |
 
 Before ordering:
 
-- [ ] Fill in the "LCSC Part #" column of the BOM, or have the assembler match by manufacturer part number.
+- [ ] Complete the "LCSC Part #" column. The ICs, diodes, ferrites, two connectors and the 10k 0.1 % resistors are filled in (checked 2026-11-14, stock not checked); the other passives are still open. JLCPCB has no 43045-0800 (J9, J10) and no 43045-1000 (J8): supply them yourself or solder them by hand. TCAN332GDR stock was low: TCAN332DR (C73651) is an equivalent for 1 Mbit/s.
+- [ ] Order "Economic PCBA", or let JLCPCB add edge rails and fiducials: the board has none.
 - [ ] Confirm that R105, R106, J4 and J5 are **not** in the placement file (`make_production.sh` checks this and stops if they are).
 - [ ] Check rotation and polarity of ICs, diodes and the LED in the assembler's preview.
-- [ ] Decide whether the assembler fits the six through-hole connectors or you do.
+- [ ] Decide whether the assembler fits the nine through-hole connectors or you do.
 
 ## 5. Parts to buy separately
 
@@ -81,13 +82,14 @@ Before ordering:
 |---|---|---|
 | WeAct STM32G474CoreBoard Long (STM32G474CEU6) | 1 | Plugs into J4/J5 |
 | Würth 61302411821, socket 1×24, 2.54 mm | 2 | J4, J5, hand-soldered. Not the dual-row 61302421821 |
-| Molex 43025-0400 housing | 1 | Mates with J1 |
-| Molex 43025-0800 housing | 3 | Mates with J2, J9, J10 |
+| Molex 43025-0400 housing | 5 | Mates with J1 (5 V in), J2 (CAN1), J3 (50 V sense), J11 (CAN2), J12 (5 V sense). Colour-code the five cables |
+| Molex 43025-0600 housing | 1 | Mates with J13 (RS-232 + I²C) |
+| Molex 43025-0800 housing | 2 | Mates with J9, J10 |
 | Molex 43025-1000 housing | 1 | Mates with J8 |
-| Molex 43025-1200 housing | 1 | Mates with J3 |
-| Molex Micro-Fit 3.0 crimp terminals, series 43030 | as needed | Plus the matching crimp tool |
-| PT1000 temperature sensors | up to 4 | |
-| Hall current sensors, 5 V supply, SIG/REF output | up to 4 | Type still to be chosen, see `docs/PCB_LAYOUT_REMINDERS.md` |
+| Molex Micro-Fit 3.0 crimp terminals, series 43030 (e.g. 43030-0007) | about 70 (52 used) | Plus the crimp tool, e.g. Molex 63819-0000 |
+| Resistor ≥ 10 kΩ (or fuse ≤ 100 mA) | 2 | In each 50 V positive wire, at the tap (see README) |
+| PT1000 temperature sensors | up to 2 | |
+| Hall current sensors, 5 V supply, SIG/REF output | up to 4 | Type still to be chosen |
 
 ## 6. Bring-up
 
@@ -95,7 +97,7 @@ Before ordering:
 - A soldering iron for J4/J5 (48 through-hole joints).
 - A 3.3 V USB-UART adapter for the debug UART on TP44 (TX), TP45 (RX) and TP46 (GND), or the module's own USB-C port.
 - An SWD programmer (for example ST-Link) for the WeAct module.
-- Firmware for the STM32G474. It is not in this repository; the existing firmware targets the STM32U575 and has to be ported. The pin mapping and the conversion formulas are in `docs/DESIGN_NOTES.md`.
+- Firmware for the STM32G474. It is not in this repository; the existing firmware targets the STM32U575 and has to be ported. The pin mapping follows from the schematic sheet "Connection To STM"; the conversion formulas are in Levitum's internal design notes.
 
 ## 7. Copying the project for a new board
 

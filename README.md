@@ -1,6 +1,6 @@
 # PCB PCU
 
-Carrier board for the Levitum PCU (Power Control Unit), revision A, 2026-11. The board takes a WeAct STM32G474 module and brings out the PCU's measurement and communication interfaces: voltage, current and temperature sensing, CAN, RS-232, I²C and digital I/O.
+Carrier board for the Levitum PCU (Power Control Unit), revision B, 2026-11. The board takes a WeAct STM32G474 module and brings out the PCU's measurement and communication interfaces: voltage, current and temperature sensing, CAN, RS-232, I²C and digital I/O.
 
 It is a 4-layer board, 101 × 77 mm, designed in KiCad 7.0.5.
 
@@ -12,12 +12,12 @@ It is a 4-layer board, 101 × 77 mm, designed in KiCad 7.0.5.
 |---|---|
 | MCU | WeAct STM32G474CoreBoard Long (STM32G474CEU6), plugged into two 1×24 sockets (J4, J5) |
 | Supply | 5 V in on J1, TVS protection, 3.3 V LDO (AP2112K-3.3) for the on-board logic |
-| Voltage sensing | 2 × 50 V and 2 × 5 V differential inputs (J3) |
+| Voltage sensing | 2 × 50 V (J3) and 2 × 5 V (J12) differential inputs |
 | Current sensing | 4 × Hall sensor inputs, SIG/REF, bidirectional around 1.65 V (J8) |
-| Temperature sensing | 4 × PT1000 inputs (J9) |
-| Communication | CAN (FDCAN2), RS-232 (MAX3221), I²C (J2) |
+| Temperature sensing | 2 × PT1000 inputs (J9) |
+| Communication | 2 × CAN for a redundant DroneCAN bus: CAN1 on FDCAN2 (J2), CAN2 on FDCAN3 (J11); RS-232 (MAX3221) and I²C (J13) |
 | Digital I/O | 4 outputs, 2 inputs (J10) |
-| Debug | 44 test pads on the bottom side, including a debug UART (TP44 TX, TP45 RX, TP46 GND) |
+| Debug | 40 test pads on the bottom side, including a debug UART (TP44 TX, TP45 RX, TP46 GND) |
 
 ### Connectors
 
@@ -26,13 +26,20 @@ All board connectors are Molex Micro-Fit 3.0, right angle. Each function has its
 | Ref | Size | Molex part | Function |
 |---|---|---|---|
 | J1 | 2×2 | 43045-0400 | 5 V supply in |
-| J2 | 2×4 | 43045-0800 | CAN, RS-232, I²C |
-| J3 | 2×6 | 43045-1200 | Voltage sensing, 50 V and 5 V. The only 12-pin header on the board |
+| J2 | 2×2 | 43045-0400 | CAN1 (same pinout as J11) |
+| J13 | 2×3 | 43045-0600 | RS-232 and I²C |
+| J3 | 2×2 | 43045-0400 | Voltage sensing, 2 × 50 V. **Same size as J1, J11 and J12: colour-code this cable** |
+| J12 | 2×2 | 43045-0400 | Voltage sensing, 2 × 5 V |
 | J8 | 2×5 | 43045-1000 | Hall current sensors |
-| J9 | 2×4 | 43045-0800 | PT1000 temperature sensors |
+| J9 | 2×4 | 43045-0800 | 2 PT1000 temperature sensors (pins 5 and 6 unused) |
 | J10 | 2×4 | 43045-0800 | Digital inputs and outputs |
+| J11 | 2×2 | 43045-0400 | CAN2 (second, redundant CAN bus) |
 
-J2, J9 and J10 share the same 8-pin size. Label those three cables.
+J9 and J10 share the same 8-pin size. Label those two cables. J13 is the only 6-pin connector.
+
+J1, J2, J3, J11 and J12 share the same 4-pin size. **The 50 V plug (J3) fits J1, J2, J11 and J12.** In J1 it puts 50 V on the 5 V rail and destroys the board and the module; in J2 or J11 it destroys the CAN transceiver. The 5 V supply plug (J1) in J2 or J11 shorts the 5 V supply to GND. The two CAN cables (J2, J11) have the same pinout and may be swapped. Give the J3 cable its own colour and the others different colours (owner decision, 2026-11-13).
+
+**50 V sense wires:** fit a series resistor of at least 10 kΩ (or a fuse of at most 100 mA) in each 50 V positive wire, close to where it taps the 50 V source. It limits every wrong plug-in of the J3 cable to a few milliamps, and an unprotected sense wire from the stack is a hazard even when it is plugged in correctly. A 10 kΩ resistor changes the channel gain by about 5 %, which the calibration removes.
 
 ## Repository layout
 
@@ -41,7 +48,6 @@ J2, J9 and J10 share the same 8-pin size. Label those three cables.
 | `kicad/` | The KiCad project: `PCB PCU.kicad_pro`, schematic (root sheet plus 8 sub-sheets), routed board, project symbol library `PCU.kicad_sym`, footprint library `PCU_Molex.pretty` |
 | `production/` | Ready-to-upload manufacturing files: Gerbers and drill files (also zipped) and the placement file |
 | `bom/` | Parts list as CSV (JLCPCB column layout) and as a readable Markdown table |
-| `docs/` | Schematic PDF, design notes, routing plan with the full change log, layout checklist, review reports |
 | `scripts/` | Read-only check scripts and the script that regenerates `production/` |
 
 ## Ordering the board
@@ -74,19 +80,13 @@ Keep the project file name `PCB PCU`. The reference designators in the schematic
 
 ## Documentation
 
-- [docs/PCB_PCU_schematic.pdf](docs/PCB_PCU_schematic.pdf): the schematic.
-- [docs/DESIGN_NOTES.md](docs/DESIGN_NOTES.md): why the circuit is the way it is, known limitations, and the conversion formulas for the firmware.
-- [docs/ROUTING_PLAN.md](docs/ROUTING_PLAN.md): layer stack, routing rules per net type, and a dated log of every change to the board.
-- [docs/PCB_LAYOUT_REMINDERS.md](docs/PCB_LAYOUT_REMINDERS.md): layout checklist with the open decisions.
-- [docs/reviews/](docs/reviews/): review reports.
-
-These documents were written while the board was developed in a different folder structure. Paths in them such as `Routing/…` or `../PCB PCU/` refer to that working folder, not to this repository.
+The design documentation (schematic PDFs, design notes, routing plan with the change log, layout checklist and review reports) is kept internally at Levitum and is not part of this repository. To view the schematic, open `kicad/PCB PCU.kicad_pro` in KiCad 7.0.5.
 
 ## Open points
 
 - The board has not been built or tested yet.
 - The firmware still targets the previous MCU (STM32U575) and has to be ported to the STM32G474. It is not part of this repository.
-- Unanswered system questions are listed in `docs/PCB_LAYOUT_REMINDERS.md`: whether the PCU is a CAN bus end, what the digital outputs drive, and which Hall sensor type is used.
+- Unanswered system questions: whether the PCU is an end of the CAN buses (CAN1 and CAN2 termination is fitted by default), what the digital outputs drive, and which Hall sensor type is used.
 
 ## Credits and use
 
