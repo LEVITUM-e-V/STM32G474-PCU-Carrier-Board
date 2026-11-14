@@ -13759,6 +13759,51 @@
       (net 4 "5V_1_NEG") (pinfunction "1") (pintype "passive") (tstamp c30e53af-c66c-49a9-a9d2-234f06db4ae1))
   )
 
+  (gr_poly
+    (pts
+      (xy 136.44 82.645833)
+      (xy 146.44 82.645833)
+      (xy 146.44 81.951388)
+      (xy 141.44 81.256944)
+      (xy 136.44 81.951388)
+    )
+
+    (stroke (width 0) (type default)) (fill solid) (layer "F.SilkS") (tstamp 299aab43-e253-411d-b24b-c1aaa7344aad))
+  (gr_poly
+    (pts
+      (xy 142.828888 82.923611)
+      (xy 142.134444 82.923611)
+      (xy 142.134444 86.673611)
+      (xy 143.245555 86.673611)
+      (xy 144.634444 86.395833)
+      (xy 144.634444 85.979166)
+      (xy 142.828888 85.979166)
+    )
+
+    (stroke (width 0) (type default)) (fill solid) (layer "F.SilkS") (tstamp 3818d242-c80b-4420-be03-c00e1ecf6d6b))
+  (gr_poly
+    (pts
+      (xy 140.051111 82.923611)
+      (xy 140.745555 82.923611)
+      (xy 140.745555 86.673611)
+      (xy 139.634444 86.673611)
+      (xy 138.245555 86.395833)
+      (xy 138.245555 85.979166)
+      (xy 140.051111 85.979166)
+    )
+
+    (stroke (width 0) (type default)) (fill solid) (layer "F.SilkS") (tstamp 5a296d54-85c9-466a-bac8-8e2742e3dedf))
+  (gr_poly
+    (pts
+      (xy 141.023333 82.645833)
+      (xy 141.856666 82.645833)
+      (xy 141.856666 86.534722)
+      (xy 141.717777 86.743055)
+      (xy 141.162222 86.743055)
+      (xy 141.023333 86.534722)
+    )
+
+    (stroke (width 0) (type default)) (fill solid) (layer "F.SilkS") (tstamp b3451b20-2ca7-4f74-9a61-33cd22e4fc4e))
   (gr_rect (start 91.44 43.18) (end 192.44 120.18)
     (stroke (width 0.1) (type default)) (fill none) (layer "Edge.Cuts") (tstamp 71f1c883-c12d-4a0f-b142-f65abb44beb1))
   (gr_text "J3  !50V!" (at 185 74.06 90) (layer "B.SilkS") (tstamp 21a53dc7-9b1b-4588-b985-1246d0fbdc01)
@@ -13783,9 +13828,6 @@
     (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
   )
   (gr_text "J10  DI/DO" (at 99.074998 62.059999 90) (layer "B.SilkS") (tstamp a24a8543-cd94-47b2-8bad-91be2867a39a)
-    (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
-  )
-  (gr_text "LEVITUM PCU G474 REV B 2026-11" (at 118.6 76.85) (layer "B.SilkS") (tstamp bf54336a-bbc5-4e47-8688-815810ac35d7)
     (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
   )
   (gr_text "J8  ISENSE" (at 184.957787 103.030227 90) (layer "B.SilkS") (tstamp c0c0a712-8f45-481e-8950-65b0b27036b8)
@@ -13814,6 +13856,9 @@
   )
   (gr_text "USB" (at 141.44 46.5) (layer "F.SilkS") (tstamp bcb1bc94-ae25-4c6d-b097-1fac5e9f8c86)
     (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (gr_text "LEVITUM" (at 141.22456 88.9) (layer "F.SilkS") (tstamp bf54336a-bbc5-4e47-8688-815810ac35d7)
+    (effects (font (size 1 2) (thickness 0.25) bold))
   )
   (gr_text "  J8 \nISENSE" (at 180.002241 113.708492 90) (layer "F.SilkS") (tstamp e3b37852-b248-411c-8934-00a2aa6cbce3)
     (effects (font (size 1 1) (thickness 0.15)))
@@ -87423,6 +87468,14 @@
         (xy 190.761212 43.6805)
         (xy 191.8155 43.6805)
       )
+    )
+  )
+  (group "Levitum logo" (id a415a488-2b05-4cf6-a5be-c276ee474150)
+    (members
+      299aab43-e253-411d-b24b-c1aaa7344aad
+      3818d242-c80b-4420-be03-c00e1ecf6d6b
+      5a296d54-85c9-466a-bac8-8e2742e3dedf
+      b3451b20-2ca7-4f74-9a61-33cd22e4fc4e
     )
   )
 )
